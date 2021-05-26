@@ -1,25 +1,22 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const products = require('./data/products');
+const dotenv = require('dotenv');
+const connectDB = require('./config/config')
 
 const app = express();
 
-const PORT = 5000;
+//dotenv config
+dotenv.config();
+
+connectDB();
+
+const PORT = process.env.PORT || 5000;
 
 app.get('/', (req, res) => {
   res.send('<h1>welcome to ECommerce');
 });
 
-app.get('/products', (req, res) => {
-  res.json(products);
-});
-
-app.get('products/:id', (req, res) => {
-  const product = products.find((p) => p._id === req.params.id)
-  res.json(product)
-})
-
 
 app.listen(PORT, function () {
-  console.log(`Server listening on port ${PORT}.`);
+  console.log(`Server listening ${process.env.NODE_ENV} mode on port ${process.env.PORT}.`);
 });
