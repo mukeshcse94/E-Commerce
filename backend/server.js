@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const connectDB = require('./config/config')
 
 const productRoutes = require('./routes/productsRoutes');
+const { errorHandler } = require('./middleware/errorHandler');
 
 const app = express();
 
@@ -19,6 +20,8 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api', productRoutes);
+//custome define error handler
+app.use(errorHandler);
 
 app.listen(PORT, function () {
   console.log(`Server listening ${process.env.NODE_ENV} mode on port ${process.env.PORT}.`);
