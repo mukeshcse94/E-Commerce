@@ -6,6 +6,8 @@ const Product = require('../models/products');
 
 router.get('/products', asyncHandler(async (req, res) => {
   const products = await Product.find({})
+  //to show Alert in UI
+  // throw new Error("custome error");
   // console.log('ssssss', products)
   res.json(products);
 })
